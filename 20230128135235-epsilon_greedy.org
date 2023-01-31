@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       92aa1272-b32f-4949-a222-3bed968d7c67
+:END:
+#+title: Epsilon-Greedy
+#+filetags: :reinforcement-learning:machine-learning:probability:
+
+The approach that consists of using a random action chosen uniformly from all the available actions with probability $\epsilon$.
+Otherwise, it picks one of the greedy actions. 
+
+\begin{aligned}
+A_t = 
+\left\{
+    \begin{array}{lr}
+        \underset{a}{\text{argmax}}\;Q_t(a)\hfill\;{with\;probability\;(1 - \epsilon)} \\
+        a\;{\sim}\;Uniform(\{a_1, ..., a_k\})\hfill\;{with\;probability\;\epsilon}
+    \end{array}
+\right\}
+\end{aligned}
+
+Generally speaking, the higher the $\epsilon$, the earlier the reward will plateau, but it will initially grow much faster.

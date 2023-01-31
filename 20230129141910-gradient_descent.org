@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       bec9a94f-1214-46f1-9a99-c5a1265f94fd
+:END:
+#+title: Gradient Descent
+#+filetags: :machine-learning:antilibrary:
+

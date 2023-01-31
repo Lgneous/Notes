@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       19a533c3-3092-4f2b-b31f-c24f3a1fe339
+:END:
+#+title: Bandit Gradient Descent
+#+filetags: :probability:reinforcement-learning:antilibrary:machine-learning:
+
+[[id:bec9a94f-1214-46f1-9a99-c5a1265f94fd][Gradient Descent]]
+[[id:d717b28d-945b-4e0d-9c86-7659bd6e4eab][k-Armed Bandit Problem]]

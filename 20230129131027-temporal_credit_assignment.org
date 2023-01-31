@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       e94a5f3d-89d7-45f7-91bc-9a934173ef42
+:END:
+#+title: Temporal Credit Assignment
+#+filetags: :machine-learning:reinforcement-learning:probability:
+
+The concept of assigning a reward to an action by estimating the long term benefits.
+
+Example:
+In football, there will be many different actions, passes, dribbles, shots, etc.
+Estimating which were good or bad actions and which ones contributed the most to scoring a goal or, in the opposite situation, losing the ball and getting a goal scored against the team is named the Temporal Credit Assignment problem.

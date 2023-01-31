@@ -1,0 +1,45 @@
+:PROPERTIES:
+:ID:       5b68bb65-d7cb-4fc8-adad-4d103f4f641c
+:END:
+#+title: Optimality of Policies and Value-Functions
+#+filetags: :markov:reinforcement-learning:machine-learning:probability:
+
+In [[id:c997a815-6c36-4935-b2bb-ab27389adacf][Markov Decision Process]], among [[id:c857ab3f-2207-43fa-9f01-8ac2579c5b85][Policies]], there will always be at least one policy that is better than everyone other policies in every state.
+
+$\pi_1(a|s)\geq\pi_2(a|s) \iff v_{\pi_1}(s,a)\ge v_{\pi_2}(a|s),\forall a\in\bold{A},s\in\bold{S}$ 
+
+An optimal policy $\pi_*$ is as good as or better than all other policies, that is:
+$\pi_*\geq\pi,\forall\pi\in\bold{\Pi}$ where $\bold{\Pi}$ is the set of all policies.
+
+There is always at least one optimal policy, intuitively, we can prove it by taking a situation where $\pi_1\geq\pi_2$ on some interval $[s_0;s_k]$, and $\pi_2\geq\pi_1$ on some interval $[s_{k+1};s_K]$.
+In this case, we can simply consider a policy $\pi_3$ such that:
+\begin{aligned}
+\pi_3(a|s) =
+\left\{
+    \begin{array}{ll}
+        \pi_1(a|s), & \text{if }s \in [s_0;s_k] \\
+        \pi_2(a|s), & \text{if }s \in [s_{k+1};s_K]
+    \end{array}
+\end{aligned}
+
+Giving us $\pi_3\geq\pi_1\;\text{and}\;\pi_3\geq\pi_2$.
+
+Do note that $\pi_3$ can (and usually will) give higher values for some states than either $\pi_1$ or $\pi_2$. This is due to the fact that the value of a policy is related to its [[id:f3d77d30-d6d0-47e1-99a1-3895f726efac][Value Function]] $v_\pi$, and that these are recursively defined over all future state-action pairs.
+
+From above, we can derive that:
+\begin{aligned}
+& v_*(s)=v_{\pi*}(s)=\mathbb{E}_{\pi*}[G_t|S_t=s]=\underset{\pi}{\text{max}}\;v_{\pi}(s)\;,\forall s \in \bold{S} \\
+\end{aligned}
+Giving us:
+\begin{aligned}
+& q_*(s,a)=q_{\pi*}(s,a)=\mathbb{E}_{\pi*}[G_t|S_t=s,A_t=a]=\underset{\pi}{\text{max}}\;q_{\pi}(s,a)\;,\forall s \in \bold{S},a \in\bold{A} \\
+\end{aligned}
+
+We can then solve the [[id:af1f5ef4-2018-4902-af3a-dc1d4cfa6ecd][Bellman Optimality Equation]] for the [[id:f3d77d30-d6d0-47e1-99a1-3895f726efac][Value Function]] and the [[id:184e5ac0-ba3a-43fd-b0f7-e1fea9fb269b][Action-Value Function]].
+
+If we already know the optimal [[id:f3d77d30-d6d0-47e1-99a1-3895f726efac][Value Function]], it is fairly easy to find the optimal [[id:c857ab3f-2207-43fa-9f01-8ac2579c5b85][Policy]].
+\begin{aligned}
+\pi_*(s) & = \underset{a}{\text{argmax}}\boxed{\sum_{s',r}p(s',r|s,a)[r+\gamma v_*(s')]} \\
+& = \underset{a}{\text{argmax}}\boxed{q_*(s,a)} \\
+\pi_*(a|s) & = 1\;\text{if}\;\underset{a}{\text{argmax}}\;q_*(s,a)\;\text{else}\;0
+\end{aligned}

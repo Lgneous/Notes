@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       c2cd6b14-11cb-4c07-b240-de8fb3a654b9
+:END:
+#+title: Monte Carlo Methods
+#+filetags: :probability:machine-learning:antilibrary:
+
+In the context of RL, Monte Carlo Methods are opposed to [[id:949e0869-348b-4557-928d-cfe54807ea5b][Temporal-Difference Methods]]

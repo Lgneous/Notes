@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       7d47041b-70e6-4dbd-a668-fe3fd20cee8a
+:END:
+#+title: Contextual Bandits
+#+filetags: :probability:machine-learning:reinforcement-learning:
+
+* Why Real World?
+
+\begin{aligned}
+Simulator \overunderset{action}{reward}{\rightleftarrows} Policy
+\end{aligned}
+
+How does a simulation differ from the real-world?
+
+\begin{aligned}
+\text{Real-World} \overunderset{action?}{reward?}{\rightleftarrows} Policy
+\end{aligned}
+
+In the real-world:
+- No [[id:e94a5f3d-89d7-45f7-91bc-9a934173ef42][Temporal Credit Assignment]].
+  
+
+The "Contextual Bandits" is related to the [[id:d717b28d-945b-4e0d-9c86-7659bd6e4eab][k-Armed Bandit Problem]], but instead tries to rely on contextual information from the environment to get higher rewards.
+
+Unlike the [[id:d717b28d-945b-4e0d-9c86-7659bd6e4eab][k-Armed Bandit Problem]], the reward is computed from both the action but also the state in which the action was performed.
+
+Contextual Bandits:
+\begin{enumerate}
+    \setlength\itemsep{4pt}
+    \item[] Repeatedly
+    \item Observe feature $x$
+    \item Choose action $a \in A$
+    \item Observe reward $r$
+\end{enumerate}

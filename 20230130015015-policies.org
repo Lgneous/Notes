@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       c857ab3f-2207-43fa-9f01-8ac2579c5b85
+:END:
+#+title: Policies
+#+filetags: :machine-learning:reinforcement-learning:
+
+A policy is a mapping from states to probabilities of selecting each possible action.
+$\pi(a|s)$ is the probability that $A_t=a$ if $S_t=s$.
+
+Like $p$, $\pi$ is an ordinary function and defines a probability distribution over $a \in \bold{A}(s)$.
+
+If an agent follows $\pi$ and maintains an average, for each state encountered, of the actual returns that have followed that state, then the average will converge to the state's [[id:f3d77d30-d6d0-47e1-99a1-3895f726efac][Value Function]] $v_\pi(s)$ as the numebr of times that state is encountered approaches infinity.
+If separate averages are kept for each action taken in each state, then these averages will similarly converge to the action-value $q_\pi(s|a)$.
+
+These estimation methods are called [[id:c2cd6b14-11cb-4c07-b240-de8fb3a654b9][Monte Carlo Methods]].

@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       7011e9a8-9442-478e-a474-45940acbb71a
+:END:
+#+title: Optimistic Initial Values
+#+filetags: :machine-learning:reinforcement-learning:probability:
+
+* Definition
+Initialize $Q_1$ as being larger than the hand-made estimate of what rewards actually look like.
+
+* Benefits
+Optimistic initial values encourage exploration early on and latter on focus on exploitation.
+
+* Limitations
+Optimistic initial values *only* drive early exploration, it will eventually stop exploring, making them non-suitable for [[id:a5b7fede-d900-47d8-b841-74ce0d6588a5][Non-Stationary Problems]].
+We may not always know what a proper optimistic initial value of $Q_1$ is.

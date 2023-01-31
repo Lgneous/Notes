@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       a5b7fede-d900-47d8-b841-74ce0d6588a5
+:END:
+#+title: Non-Stationary Problems
+#+filetags: :machine-learning:reinforcement-learning:probability:
+
+A non-stationary problem is a problem where the distribution of each action changes at different timesteps.
+The following general update rule lets us control how much we want to look back at past estimates:
+$Q_{n+1} = Q_n + \frac{1}{n}(R_n-Q_n)$
+
+Replace $\frac{1}{n}$ with an arbitrary term $\alpha$:
+\begin{aligned}
+Q_{n+1} & = Q_n + \alpha(R_n-Q_n) \\
+& = Q_n + \alpha R_n - \alpha Q_n \\
+& = \alpha R_n + Q_n - \alpha Q_n \\
+& = \alpha R_n + (1 - \alpha)Q_n \\
+& = \alpha R_n + (1 - \alpha)(\alpha R_{n-1} + (1 - \alpha)Q_{n-1}) \\
+& = \alpha R_n + (1 - \alpha)\alpha R_{n-1} + (1 - \alpha)^2Q_{n-1} \\
+& = \sum_{i=1}^{n}(1-\alpha)^{i-1}\alpha R_{n-i+1}
+\end{aligned}
+This definition can recurse all the way back to the initial $Q_1$, and that term will have a coefficient of $(1-\alpha)^n$.
+This can be interpreted as $\alpha$ representing how much "weight" we give to the more recent terms compared to the older ones.
+An $\alpha$ of 1 means we fully ignore the past results, $Q_{n+1}=R_n$.
+Conversely, an $\alpha$ of 0 means we never update anything anymore, $Q_{n+1}=Q_n$.

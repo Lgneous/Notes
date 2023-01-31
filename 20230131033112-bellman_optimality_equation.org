@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       af1f5ef4-2018-4902-af3a-dc1d4cfa6ecd
+:END:
+#+title: Bellman Optimality Equation
+
+Recall from [[id:f3d77d30-d6d0-47e1-99a1-3895f726efac][Value Function]] that:
+\begin{aligned}
+& v_\pi(s) = \sum_a \pi(a|s)\sum_{s',r}p(s',r|s,a)[r+\gamma v_\pi(s')] \\
+& {\textcolor{red}{v_*}}(s) = \sum_a \textcolor{blue}{\pi_*}(a|s)\sum_{s',r}p(s',r|s,a)[r+\gamma \textcolor{red}{v_*}(s')] \\
+\end{aligned}
+However, because $\textcolor{blue}{\pi_*}$ is the optimal policy ([[id:5b68bb65-d7cb-4fc8-adad-4d103f4f641c][Optimality of Policies and Value-Functions]]), we can rewrite the [[id:a92cb8d5-068e-492a-8f75-f8449f3459ec][Bellman Equation]] in a form that doesn't reference it anymore:
+\begin{aligned}
+& {\textcolor{red}{v_*}}(s) = \textcolor{blue}{\underset{a}{max}}\sum_{s',r}p(s',r|s,a)[r+\gamma \textcolor{red}{v_*}(s')] \\
+\end{aligned}
+This the Bellman Optimality Equation for the [[id:f3d77d30-d6d0-47e1-99a1-3895f726efac][Value Function]] $v_*$.
+
+We can use this reasoning for the [[id:184e5ac0-ba3a-43fd-b0f7-e1fea9fb269b][Action-Value]] $q_*$:
+\begin{aligned}
+q_\pi(s,a) & =\mathbb{E}_\pi[G_t|S_t=s,A_t=a] \\
+& = \sum_{s', r} p(s', r|s, a)[r+\gamma v_\pi(s')] \\
+& = \sum_{s', r} p(s', r|s, a)[r+\gamma \sum_{a'}\pi(a'|s')q_\pi(s'|a')] \\
+\textcolor{red}{q_*}(s,a) & = \sum_{s', r} p(s', r|s, a)[r+\gamma \sum_{a'}\textcolor{blue}{\pi_*}(a'|s')\textcolor{red}{q_*}(s'|a')] \\
+\textcolor{red}{q_*}(s,a) & = \sum_{s', r} p(s', r|s, a)[r+\gamma\;\textcolor{blue}{\underset{a'}{\text{max}}}\;\textcolor{red}{q_*}(s'|a')] \\
+\end{aligned}
+This is the Bellman Optimality Equation for the [[id:184e5ac0-ba3a-43fd-b0f7-e1fea9fb269b][Action-Value Function]] $q_*$.

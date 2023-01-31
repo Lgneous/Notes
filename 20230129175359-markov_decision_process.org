@@ -1,0 +1,52 @@
+:PROPERTIES:
+:ID:       c997a815-6c36-4935-b2bb-ab27389adacf
+:END:
+#+title: Markov Decision Process
+#+filetags: :reinforcement-learning:markov:probability:
+
+Markov Decision Process (MDP) are a formalisation of sequential decision-making where actions not only influence immediate rewards, but also future states, and thus future rewards. Thus MDP involved delayed reward and the need to trade off immediate and delayed rewards.
+
+Whereas in [[id:d717b28d-945b-4e0d-9c86-7659bd6e4eab][k-Armed Bandit Problem]] we estimated the value $q_*(a)$ of each action $a$, in MDP, we estimate the value $q_*(s, a)$ of each action $a$ in each state $s$, or we estimate the value $v_*(s)$ of a state given optimal action selection.
+
+These state-dependent quantities are essential to accurately perform [[id:e94a5f3d-89d7-45f7-91bc-9a934173ef42][Temporal Credit Assignment]].
+
+MDP are a form of idealized representation of the Reinforcement Learning problem, making use of the concepts of [[id:f3d77d30-d6d0-47e1-99a1-3895f726efac][Value Function]] and [[id:a92cb8d5-068e-492a-8f75-f8449f3459ec][Bellman Equation]].
+
+MDPs are based around [[id:9835f689-edea-4981-955a-d3e8355a2259][Agent-Environment Interaction]].
+
+The [[id:c997a815-6c36-4935-b2bb-ab27389adacf][Markov Decision Process]] and the agent make up a sequence that looks like:
+${S_0,A_0,R_1,S_1,A_1,R_2,S_2,A_2,...}$
+
+In a finite MDP, the sets $\bold{S}$, $\bold{A}$ and $\bold{R})$ have a finite number of elements, and as such, $R_t$ and $S_t$ have well-defined discrete probability distributions dependent only on the preceding state and action.
+
+That is:
+$p(s',r|s,a)\;\dot{=}\;Pr\{S_t=s',R_t=r|S_{t-1}=s,A_{t-1}=a\}$
+The function $p: \bold{S}\times\bold{R}\times\bold{S}\times\bold{A}\rightarrow[0, 1]$ is thus deterministic.
+
+This function represents a restriction not on the agent's decision, but on the state.
+
+Given that it is a probability distribution:
+\begin{aligned}
+\sum_{s\in\bold{S}}\sum_{r\in\bold{R}}p(s',r|s,a)=1
+\end{aligned}
+
+A state must include information about all aspects of the past agent-environment interaction that make a difference in the future, this is called the [[id:715b2691-f3c8-4be9-a595-e35ce7b88e00][Markov Property]].
+
+We can compute the state-transition probability using:
+\begin{aligned}
+p(s'|s,a)\;\dot{=}\;Pr\{S_t=s'|S_{t-1}=s,A_{t-1}=a\}=\sum_{r\in\bold{R}}p(s',r|s,a)
+\end{aligned}
+
+We can compute the reward for a given state-action pair:
+\begin{aligned}
+r(s,a)\;\dot{=}\;\mathbb{E}[\bold{R}_t|\bold{S}_{t-1}=s,\bold{A}_{t-1}=a]=\sum_{r\in\bold{R}}r\sum_{s'\in\bold{S}}p(s',r|s,a)
+\end{aligned}
+
+And the reward for state-action-next-state triples:
+\begin{aligned}
+r(s,a,s')\;\dot{=}\;\mathbb{E}[\bold{R}_t|\bold{S}_{t-1}=s,\bold{A}_{t-1}=a,\bold{S}_{t}=s']=\sum_{r\in\bold{R}}r\frac{p(s',r|s,a)}{p(s'|s,a)}
+\end{aligned}
+
+[[file:2023-01-29_21-07-29_image.png]]
+
+The goal of our agent is to maximize the expected [[id:bfeab6af-810e-4460-9604-f1c3e1f0e856][Returns]].

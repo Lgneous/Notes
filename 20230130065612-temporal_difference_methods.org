@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       949e0869-348b-4557-928d-cfe54807ea5b
+:END:
+#+title: Temporal-Difference Methods
+#+filetags: :antilibrary:reinforcement-learning:
+In the context of RL, Temporal-Difference Methods are opposed to [[id:c2cd6b14-11cb-4c07-b240-de8fb3a654b9][Monte Carlo Methods]] 
+

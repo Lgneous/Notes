@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       eab24075-62e3-4714-873d-e71c35fd5083
+:END:
+#+title: Episode
+#+filetags: :reinforcement-learning:
+
+Episodes are well-delimited sequences of timesteps that begin independently of how the previous one ended, an example of an episode would be a game of chess.
+No matter the result of the previous game (episode), the next game goes on normally, but the agent may use newly learned information.
+
+Games end in a "terminal state", for instance a checkmate in chess.
+Tasks that do have such a terminal state are called episodic tasks.
+
+In episodic tasks, we usually denote the set of all states without the terminal state(s) as $\bold{S}$, and we include the terminal states with $\bold{S}^+$.
+
+The time of termination $T$ (that is, the timestep at which we reach a terminal state) usually varies from episode to episode.
+
+On the other hand, when [[id:9835f689-edea-4981-955a-d3e8355a2259][Agent-Environment Interaction]]s don't fall into discrete episodes, we call these "continuing tasks".
+In such cases, the definition of $G_t$ defined in [[id:bfeab6af-810e-4460-9604-f1c3e1f0e856][Returns]] doesn't apply because $T=\infty$.

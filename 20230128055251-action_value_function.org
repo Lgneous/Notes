@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       184e5ac0-ba3a-43fd-b0f7-e1fea9fb269b
+:END:
+#+title: Action-Value Function
+#+filetags: :machine-learning:probability:reinforcement-learning:
+
+The true value of an action is the average (expectation) reward when that action is selected.
+$Q_t(a)\;\dot{=}\;\frac{\text{sum of rewards when a taken prior to t}}{\text{number of times a taken prior to t}}=\frac{\sum^{t-1}_{i=1}R_i*(A_i=a)}{\sum^{t-1}_{i=1}A_i=a}$
+
+If the denominator is $0$ then we can just define a default value, such as $0$ or $-\infty$.
+
+As the denominator goes to $\infty$, then $Q_t(a)$ goes to $q_*(a)$, as per the law of large numbers.
+
+The simplest action is to pick the action which maps to the highest estimated value: $A_t \dot{=} \underset{a}{\text{argmax}}(Q_t(a))$.
+An alternative would be to always select the greedy action but every once in a while, with a small probability $\epsilon$, select a random action from all the actions with equal probability. This is called an $\epsilon-greedy$ method, it has the advantage that, as the number of actions taken grows, every action will be sampled infinitely, ensuring that $Q_t(a)$ eventually corresponds to $q_*(a)$.
+
+**** In $\epsilon-greedy$ action selection, for the case of two actions and $\epsilon=0.5$, what is the probability that the greedy action is selected?
+$\frac{3}{4}$, as there is a probability of $1-\epsilon$ that the greedy action is selected, and a probability of $\epsilon$ that the selected action is picked uniformly from all the actions, thus $p(\text{selected action}\in\text{greedy actions})=(1-\epsilon)+\epsilon*\frac{\text{number of greedy actions}}{\text{number of actions}}$.
+
+* Incremental Update Rule
+\begin{aligned}
+Q_{n+1} & = \frac{1}{n}\sum_{i=1}^{n}R_i \\
+& = \frac{1}{n}(R_n + \sum_{i=1}^{n-1}R_i) \\
+& = \frac{1}{n}(R_n + (n-1)\frac{1}{n-1}\sum_{i=1}^{n-1}R_i) \\
+& = \frac{1}{n}(R_n + (n-1)Q_n) \\
+& = \frac{1}{n}(R_n + nQ_n - Q_n) \\
+& = Q_n + \frac{1}{n}(R_n - Q_n)
+\end{aligned}
+
+In layman term:
+$NewEstimate \leftarrow OldEstimate + StepSize(NewResult - OldEstimate)$
+
+The $StepSize$ can be any function from $n$ to $[0, 1]$, in our above example, $StepSize(n) = \frac{1}{n}$.
+This $StepSize$ function can be very useful in order to give varying weights to more recent or older estimates, or in cases like [[id:a5b7fede-d900-47d8-b841-74ce0d6588a5][Non-Stationary Problems]].

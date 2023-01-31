@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       bfeab6af-810e-4460-9604-f1c3e1f0e856
+:END:
+#+title: Returns
+#+filetags: :reinforcement-learning:probability:
+
+The expected return $G_t$ can be simply modelled as the sum of all future rewards, it can thus be modelled as $G_t=R_{t+1}+R_{t+2}+R_{t+3}+...+R_{T}$ where $T$ is the final time step.
+
+This approach is applicable in situations in which there is a notion of final time step, if we can break down the [[id:9835f689-edea-4981-955a-d3e8355a2259][Agent-Environment Interaction]]s into subsequences, which we call [[id:eab24075-62e3-4714-873d-e71c35fd5083][Episode]]s.
+
+Another important concept is that of "discounting":
+\begin{aligned}
+G_t=R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+...=\sum_{k=0}^{\infty}\gamma^kR_{t+k+1}
+\end{aligned}
+where $0\leq\gamma\leq1$ is the discount rate.
+
+If $\gamma<1$, as $k$ grows towards infinity, the discounted reward $\gamma^kR_{t+k+1}$ goes to 0 assuming $R_{k}$ is bounded, this means that $G_t$ has a limit, that we can compute by simply setting a threshold after which we stop adding $\gamma^kR_{t+k+1}$.
+
+If $\gamma=0$, then the agent is "myopic" with respect to future rewards, and only look at $R_{t+1}$.
+
+As $\gamma$ approaches $1$, the agent considers future rewards more and more, until $\gamma=1$ and the agent considers every future rewards as strongly as the most recent one, and $G_t$ diverges.
+
+We can also rearrange $G_t$ in a way that is important both theoretically and practically:
+\begin{aligned}
+G_t & =R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+\gamma^3R_{t+4}+... \\
+& = R_{t+1}+\gamma (R_{t+2}+\gamma R_{t+3}+\gamma^2R_{t+4}+...) \\
+& = R_{t+1}+\gamma G_{t+1}
+\end{aligned}
+
+Almost all RL algorithm involve estimating some kind of [[id:f3d77d30-d6d0-47e1-99a1-3895f726efac][Value Function]], these functions describe how good a state (or a state-action pair) is in terms of expected returns.
+These value functions are defined with respect with some way of acting, called [[id:c857ab3f-2207-43fa-9f01-8ac2579c5b85][Policies]].

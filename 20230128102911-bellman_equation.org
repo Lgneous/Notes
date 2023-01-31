@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       a92cb8d5-068e-492a-8f75-f8449f3459ec
+:END:
+#+title: Bellman Equation
+#+filetags: :probability:reinforcement-learning:
+
+Related: [[id:bfeab6af-810e-4460-9604-f1c3e1f0e856][Returns]]
+
+The Bellman equation for the [[id:f3d77d30-d6d0-47e1-99a1-3895f726efac][Value Function]] $v_\pi(s)$ defines a relationship between the value of a state and the value of its possible successor states $v_\pi(s')$.
+
+\begin{aligned}
+v_\pi(s) & = \mathbb{E}_\pi[G_t|S_t=s] \\
+& = \mathbb{E}_\pi[\sum_{k=0}^{\infty}\gamma^kR_{t+k+1}|S_t=s] \\
+& = \textcolor{red}{\mathbb{E}_\pi[}\textcolor{blue}{R_{t+1}+\gamma G_{t+1}}|\textcolor{red}{S_t=s]} \\
+& = \textcolor{red}{\sum_a \pi(a|s)\sum_{s',r}p(s,r|s',a)}[\textcolor{blue}{r+\gamma\boxed{\mathbb{E}_\pi[G_{t+1}|S_{t+1}=s']}}] \\
+& = \textcolor{red}{\sum_a \pi(a|s)\sum_{s',r}p(s,r|s',a)}[\textcolor{blue}{r+\gamma \boxed{v_\pi(s')}}] \\
+\end{aligned}
+
+
+
+We can also define a similar Bellman equation for the state-action function $q_\pi(s,a)$.
+\begin{aligned}
+q_\pi(s,a) & = \mathbb{E}_\pi[G_t|S_t=s, A_t=a] \\
+& = \mathbb{E}_\pi[\sum_{k=0}^{\infty}\gamma^kR_{t+k+1}|S_t=s,A_t=a] \\
+& = \mathbb{E}_\pi[R_{t+1}+\gamma G_{t+1}|S_t=s,A_t=a] \\
+& = \sum_{s',r}p(s,r|s',a)[r+\gamma\boxed{\mathbb{E}_\pi[G_{t+1}|S_{t+1}=s']}] \\
+& = \sum_{s',r}p(s,r|s',a)[r+\gamma\boxed{\sum_{a'}\pi(a'|s')\textcolor{blue}{\mathbb{E}_\pi[G_{t+1}|S_{t+1}=s',A_{t+1}=a']}}] \\
+& = \sum_{s',r}p(s,r|s',a)[r+\gamma\boxed{\sum_{a'}\pi(a'|s')\textcolor{blue}{q_\pi(s',a')}}] \\
+\end{aligned}

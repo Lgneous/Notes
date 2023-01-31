@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       d717b28d-945b-4e0d-9c86-7659bd6e4eab
+:END:
+#+title: k-Armed Bandit Problem
+#+filetags: :machine-learning:probability:reinforcement-learning:
+
+Faced repeatedly with a choice among $k$ different actions. After each choice, you receive a numerical reward chosen from a stationary probability distribution that depends on the action you have selected. Your objective is to maximize the expected total reward over some time period.
+For example, in a casino with $k$ slot machines with independent reward distributions, when you pull a lever, you get a certain reward (or not, in the case you lose), starting out knowing nothing about either of these slot machines, try to maximize the expectated gain in a given amount of lever pulls.
+
+We define the value of a given action (pulling a lever) as $q_*(a)=\mathbb{E}[R_t|A_t=a]\;\forall a \in \{1, ..., k\}$ where $A_t$ denotes the action taken and $R_t$ the corresponding reward, at timestep $t$.
+
+We don't know in advance the value of each action, otherwise we could just pick the action with the biggest value. Instead, we can form estimates at a given timestep, which we denote $Q_t(a)$. Our goal is to have $Q_t(a)$ approximate $q_*(a)$ as much as possible.
+
+If you keep estimates of the action values, then at any timestep, there is at least one action whose estimated value is greater or equal to every other action, that is $\forall{b}, \exists{a}, Q_t(a)>=Q_t(b)$.
+These actions are called greedy, when you select one of these greedy actions, you are doing something called exploitation, instead, if you pick any of the non-greedy actions, you are doing exploration.
+
+Exploitation is the right thing to do in order to maximize the expected reward on one step, but exploration may produce the greater total reward in the long run.
+
+For example, suppose a greedy action’s value is known with certainty, while several other actions are estimated to be nearly as good but with substantial uncertainty. The uncertainty is such that at least one of these other actions probably is actually better than the greedy action, but you don’t know which one. If you have many time steps ahead on which to make action selections, then it may be better to explore the non-greedy actions and discover which of them are better than the greedy action.
+
+The methods used to estimate the values of different actions are called "[[id:184e5ac0-ba3a-43fd-b0f7-e1fea9fb269b][Action-Value]]" methods.

@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       ed5a2094-0450-4f34-984a-d17d245788a9
+:END:
+#+title: Upper-Confidence Bound Action Selection
+#+filetags: :probability:machine-learning:reinforcement-learning:
+
+[[id:92aa1272-b32f-4949-a222-3bed968d7c67][Epsilon-Greedy]] picks an exploration action with a probability of $\epsilon$.
+
+Upper-Confidence Bound Action Selection (UCB) uses the concept of confidence intervals to select actions.
+
+For that, we need uncertainty in our estimates:
+Assuming $Q_t(a)$ has a given value, we can say that we are "confident" that $q_*(a)$ lies in some interval around $Q_t(a)$.
+
+We will represent this with a confidence interval around $Q_t(a)$.
+
+We can also relate this concept with [[id:7011e9a8-9442-478e-a474-45940acbb71a][Optimistic Initial Values]] by stay optimistic when faced with uncertainty, that is, if we have, say, 3 actions, if we have no indication of which is best, we can just pick the action which has the confidence interval with the highest upper bound.
+
+This works because either it does have the highest value and it gets the reward, or $Q_t(\text{selected action})$ and its associated confidence interval will be updated accordingly to a lower value.
+
+The formula to select an action using UCB is:
+$A_t\;\dot{=}\;\underset{a}{\text{argmax}}(Q_t(a)+c\sqrt{\frac{ln\;t}{N_t(a)}})$
+- $Q_t(a)$ represents our current estimate for action $a$.
+- $c$ is a user-specified parameter that controls the amount of exploration, the higher it is, the bigger the amount of exploration done.
+- $N_t(a)$ is the number of times the action $a$ was selected.
+- $t$ is the amount of timesteps so far.

@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       715b2691-f3c8-4be9-a595-e35ce7b88e00
+:END:
+#+title: Markov Property
+#+filetags: :probability:markov:reinforcement-learning:
+
+The Markov Property refers to the "memoryless" property of a stochastic process.
+
+Let $\bold{S}_t$ the state at timestep $t$ of a given [[id:c997a815-6c36-4935-b2bb-ab27389adacf][Markov Decision Process]].
+Let $\bold{A}_t$ the action taken at timestep $t$.
+Let $\bold{H}$ the history of all past states an agent took.
+The Markov Property states that $p(\bold{S}_{t},\bold{A}_{t}|\bold{H})=p(\bold{S}_{t},\bold{A}_{t}|\bold{S}_{t-1})$.
